@@ -3,6 +3,7 @@ import {
   Get,
   Post,
   Body,
+  Put,
   Patch,
   Param,
   Delete,
@@ -12,6 +13,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -31,5 +33,16 @@ export class UsersController {
   @Get(':id')
   findOne(@Param('id') id: string): Promise<User> {
     return this.usersService.findOne(id);
+  }
+  @Put(':id')
+  async updateOne(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    return this.usersService.updateOne(id, updateUserDto);
+  }
+  @Delete(':id')
+  async deleteOne(@Param('id') id: string): Promise<User[]> {
+    return this.usersService.removeOne(id);
   }
 }
