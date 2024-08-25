@@ -14,15 +14,20 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
+import {LoginUserDto} from './dto/login-user.dto'
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  /* trasnforma una funcion en una ruta de tipo POST */
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.create(createUserDto);
+  }
+
+  @Post('login')
+  login(@Body() loginUserDto : LoginUserDto): Promise<User> {
+    return this.usersService.login(loginUserDto);
   }
 
   @Get()
@@ -34,6 +39,7 @@ export class UsersController {
   findOne(@Param('id') id: string): Promise<User> {
     return this.usersService.findOne(id);
   }
+
   @Put(':id')
   async updateOne(
     @Param('id') id: string,

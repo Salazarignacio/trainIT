@@ -9,8 +9,5 @@ export class AppController {/* el controller necesita consumir un servicio (inje
   getHello(): string { /* ejecuta la implementacion del servicio appService */
     return this.appService.getHello();
   }
-  @Get("/nacho")
-  getNacho(): string{
-    return this.appService.getNacho()
-  }
+
 }
